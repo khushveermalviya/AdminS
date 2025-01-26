@@ -2,7 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink } from '@apollo/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, createHashRouter, RouterProvider } from 'react-router-dom';
 import Main from './Component/Main.jsx';
 import Admin from './pages/Admin.jsx';
 import Student from './pages/Student.jsx';
@@ -36,7 +36,7 @@ import FacuiltyRoutes from "./Routes/FacuiltyRoutes.jsx" // Corrected import
 import cnt from '../Apolloclient.jsx';
 // Import ErrorBoundary
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   // { 
   //   path: '/',
   //   element: <Main />,
