@@ -63,6 +63,9 @@ export default function Academics() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Academic Management</h1>
+        <div className="bg-yellow-200 text-yellow-800 p-4 rounded mb-4">
+        This section is currently under maintenance.So see other section of it 
+      </div>
         <div className="space-x-4">
           <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
             Add Course

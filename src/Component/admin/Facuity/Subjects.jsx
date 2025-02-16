@@ -10,6 +10,9 @@ export default function Subjects() {
   return (
     <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
       <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-4">Subjects</h2>
+      <div className="bg-yellow-200 text-yellow-800 p-4 rounded mb-4">
+        This section is currently under maintenance.So see other section of it 
+      </div>
       <div className="overflow-x-auto">
         <table className="min-w-full table-auto border-collapse border border-gray-200 dark:border-gray-700">
           <thead>

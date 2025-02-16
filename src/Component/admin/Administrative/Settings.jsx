@@ -263,6 +263,11 @@ const TimetableManagement = () => {
     <div className="container mx-auto p-4">
       <h2 className="text-2xl font-bold mb-4">Timetable Management</h2>
 
+      {/* Maintenance Message */}
+      <div className="bg-yellow-200 text-yellow-800 p-4 rounded mb-4">
+        This section is currently under maintenance.So see other section of it 
+      </div>
+
       {/* Form */}
       <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         {/* Class Dropdown */}

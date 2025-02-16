@@ -37,6 +37,9 @@ const Facilities = () => {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
       <h1 className="text-2xl font-semibold text-gray-800 dark:text-white mb-6">Facilities</h1>
+      <div className="bg-yellow-200 text-yellow-800 p-4 rounded mb-4">
+        This section is currently under maintenance.So see other section of it 
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {facilities.map((facility) => (
           <div

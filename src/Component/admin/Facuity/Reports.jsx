@@ -10,6 +10,9 @@ export default function Reports() {
   return (
     <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
       <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-4">Reports</h2>
+      <div className="bg-yellow-200 text-yellow-800 p-4 rounded mb-4">
+        This section is currently under maintenance.So see other section of it 
+      </div>
       <ul className="space-y-3">
         {reports.map((report, index) => (
           <li

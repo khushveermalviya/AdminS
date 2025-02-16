@@ -28,6 +28,9 @@ export default function Timetable() {
   // Render the component
   return (
     <div>
+       <div className="bg-yellow-200 text-yellow-800 p-4 rounded mb-4">
+        This section is currently under maintenance.So see other section of it 
+      </div>
       <h1>Timetable for Faculty</h1>
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error.message}</p>}
