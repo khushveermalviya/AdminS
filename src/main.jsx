@@ -34,6 +34,9 @@ import Complaint from './Component/admin/Students/Complaint.jsx';
 import AdminRoutes from "./Routes/adminRoutes.jsx";
 import FacuiltyRoutes from "./Routes/FacuiltyRoutes.jsx" // Corrected import
 import cnt from '../Apolloclient.jsx';
+import AdminLogin from './Component/admin/Administrative/Adminlogin.jsx';
+import Faclogin from './Component/admin/Facuity/Faclogin.jsx';
+
 // Import ErrorBoundary
 
 const router = createHashRouter([
@@ -44,72 +47,39 @@ const router = createHashRouter([
   // },
   {
     path: '/',
-    element: <Adminlayout />,
-
+    element: <LoginLayout />,
     children: [
       {
         path: "",
-        element: <Login />
+        element: <Admin /> // This is your portal selection page with two cards
+      },
+      
+      // Administrative login and routes
+      {
+        path: 'AdministrativeAuth',
+        element: <AdminLogin /> // No children here - this is just the login page
       },
       {
-        path: "adminPanel",
-        element: <Protected><LoginLayout /></Protected>,
-        children: [
-          {
-            path: '',
-            element: <Protected><Admin /></Protected>
-          },
-          {
-            path: 'Facility/*',
-            element: <Protected><FacuiltyRoutes/></Protected>
-          },
-          {
-            path: 'Administrative/*',
-            element: <Protected><AdminRoutes /></Protected> // Corrected usage
-          },
-          {
-            path: "class",
-            element: <ClassesLayout />,
-            children: [
-              {
-                path: "",
-                element: <Protected><S1 /></Protected>
-              },  
-              {
-                path: "add",
-                element: <Form />
-              },
-              {
-                path: "delete",
-                element: <Delete />
-              },
-              {
-                path: "annunosment",
-                element: <Annunosment />
-              },
-              {
-                path: "Complaint",
-                element: <Complaint/>
-              },
-              {
-                path: ":classId",
-                element: <Classaddlayout />,
-                children: [
-                  {
-                    path: "",
-                    element: <Protected><Classes /></Protected>, // Main Classes Page
-                  },
-                  {
-                    path: "details/:studentId",
-                    element: <Protected><Details /></Protected>
-                  },
-                ]
-              }
-            ]
-          }
-        ]
-      }
+        path: '/AdministrativeAuth/Administrative/*', // This will match all Administrative routes
+        element: <Protected><AdminRoutes /></Protected>
+      },
+      
+      // Faculty login and routes
+      {
+        path: 'FacilityAuth',
+        element: <Faclogin /> // No children here - this is just the login page
+      },
+ 
     ]
+  },
+
+  {
+path:"/Administrative/*",
+element: <Protected><AdminRoutes /></Protected>
+  },
+  {
+    path: '/Facility/*', // This will match all Facility routes
+    element: <Protected><FacuiltyRoutes /></Protected>
   },
   {
     path: '/Student',

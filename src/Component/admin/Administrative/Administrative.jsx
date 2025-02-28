@@ -1,37 +1,89 @@
-import React, { useState } from "react";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import React, { useState ,useEffect} from "react";
+import { NavLink, Outlet, useNavigate, useLocation } from "react-router-dom";
 import {
   BarChart3, BookOpen, DollarSign, FileText,
   GraduationCap, Settings, Users, Building2,
-  Bell, Search, Menu, X, LogOut
+  Bell, Search, Menu, X, LogOut,CheckCircle
 } from "lucide-react";
+import { toast, Toaster } from 'react-hot-toast';
 
-export default function Administrative({ Username }) {
+
+export default function Administrative() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const navigate = useNavigate();
+  const [toastShown, setToastShown] = useState(false); // State to track if toast has been shown
+  const [Username, setUsername] = useState("Guest User");
+ 
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('currentUsername');
+    if (storedUsername) {
+      setUsername(storedUsername);
+      
+      // Display welcome toast when username is loaded
+      if(!toastShown){
+      toast.custom((t) => (
+        <div className={`${
+          t.visible ? 'animate-enter' : 'animate-leave'
+        } max-w-md w-full bg-white dark:bg-gray-800 shadow-lg rounded-lg pointer-events-auto flex`}>
+          <div className="flex-1 w-0 p-4">
+            <div className="flex items-center">
+              <div className="flex-shrink-0 pt-0.5">
+                <div className="h-10 w-10 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
+                  <CheckCircle className="h-6 w-6 text-green-600 dark:text-green-400 animate-pulse" />
+                </div>
+              </div>
+              <div className="ml-3 flex-1">
+                <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                  Welcome back, {storedUsername}!
+                </p>
+                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                  You're successfully logged in to the admin panel
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="flex border-l border-gray-200 dark:border-gray-700">
+            <button
+              onClick={() => toast.dismiss(t.id)}
+              className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 focus:outline-none"
+            >
+              Dismiss
+            </button>
+          </div>
+        </div>
+      ), { duration: 5000 });
+      setToastShown(true)
+    }
+    }
+  }, []);
+
   const navItems = [
     { icon: <BarChart3 className="w-5 h-5" />, title: "Dashboard", path: "" },
     { icon: <Users className="w-5 h-5" />, title: "Staff Management", path: "staff" },
     { icon: <GraduationCap className="w-5 h-5" />, title: "Students", path: "students" },
+    { icon: <GraduationCap className="w-5 h-5" />, title: "Promote", path: "Promote" },
     { icon: <DollarSign className="w-5 h-5" />, title: "Finance", path: "finance" },
     { icon: <DollarSign className="w-5 h-5" />, title: "ExpenseManagement", path: "ExpenseManagement" },
     { icon: <BookOpen className="w-5 h-5" />, title: "Academics", path: "academics" },
     { icon: <Building2 className="w-5 h-5" />, title: "Facilities", path: "facilities" },
     { icon: <FileText className="w-5 h-5" />, title: "Reports", path: "reports" },
     { icon: <FileText className="w-5 h-5" />, title: "Notification", path: "Notification" },
-    { icon: <Settings className="w-5 h-5" />, title: "TimeTable", path: "settings" },
+    { icon: <Settings className="w-5 h-5" />, title: "TimetableManagement", path: "TimeTable" },
+    { icon: <Settings className="w-5 h-5" />, title: "Settings", path: "Setting" },
   ];
+
   const handleLogout = () => {
     localStorage.removeItem('tokenss');
-    navigate('/admin');
+    navigate('/AdministrativeAuth');
   };
 
   return (
     <div className="min-h-screen flex bg-gray-100 dark:bg-gray-900">
-      {/* Sidebar */}
+            <Toaster position="top-center" />
       <aside className={`fixed lg:sticky top-0 left-0 h-screen w-64 bg-white dark:bg-gray-800 shadow-lg transform ${
         isSidebarOpen ? "translate-x-0" : "-translate-x-full"
       } transition-transform lg:translate-x-0 z-50`}>
@@ -60,7 +112,6 @@ export default function Administrative({ Username }) {
             ))}
           </div>
           
-          {/* Logout Button in Sidebar */}
           <button
             onClick={() => setIsLogoutDialogOpen(true)}
             className="flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors mt-auto mb-4"
@@ -94,7 +145,6 @@ export default function Administrative({ Username }) {
                 <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full" />
               </button>
               
-              {/* Profile Dropdown */}
               <div className="relative">
                 <button 
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
@@ -106,7 +156,6 @@ export default function Administrative({ Username }) {
                     <p className="text-xs text-gray-500 dark:text-gray-400">{/* Add additional user info here if needed */}</p>
                   </div>
                 </button>
-                {/* Profile Dropdown Menu */}
                 {isProfileOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-50">
                     <button
@@ -125,7 +174,6 @@ export default function Administrative({ Username }) {
         <main className="flex-1 p-6">
           <Outlet />
         </main>
-        {/* Logout Confirmation Dialog */}
         <div className={`fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center ${
           isLogoutDialogOpen ? "visible opacity-100" : "invisible opacity-0 pointer-events-none"
         }`}

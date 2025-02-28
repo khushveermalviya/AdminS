@@ -84,9 +84,9 @@ export default function StaffDetails() {
           <p><strong>Email:</strong> {staff.email}</p>
           <p><strong>Phone:</strong> {staff.phone}</p>
           <p><strong>Status:</strong> {staff.status}</p>
-          <p><strong>Joining Date:</strong> {new Date(staff.joiningDate).toLocaleDateString()}</p>
-          <p><strong>Created At:</strong> {new Date(staff.createdAt).toLocaleDateString()}</p>
-          <p><strong>Updated At:</strong> {new Date(staff.updatedAt).toLocaleDateString()}</p>
+          <p><strong>Joining Date:</strong> {new Date(parseInt(staff.joiningDate)).toLocaleDateString()}</p>
+          <p><strong>Created At:</strong> {new Date(parseInt(staff.createdAt)).toLocaleDateString()}</p>
+          <p><strong>Updated At:</strong> {new Date(parseInt(staff.updatedAt)).toLocaleDateString()}</p>
         </div>
       </div>
     </div>

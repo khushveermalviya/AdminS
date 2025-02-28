@@ -6,7 +6,7 @@ const Protected = ({ children }) => {
   const isAuthenticated = !!localStorage.getItem('tokenss'); // Check if token exists
 
   if (!isAuthenticated) {
-    return <Navigate to="/admin" replace />;
+    return <Navigate to="/AdministrativeAuth" replace />;
   }
 
   return children;

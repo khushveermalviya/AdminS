@@ -83,6 +83,7 @@ const Addstaff = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <h1 className='w-full h-20 bg-white '>Currently Under Maintanece</h1>
       <div className="w-full max-w-lg bg-white p-8 rounded-lg shadow-lg space-y-6">
         <h2 className="text-2xl font-bold text-center text-gray-800">Staff Registration Form</h2>
 
@@ -230,7 +231,7 @@ const Addstaff = () => {
                   name="Password"
                   value={formData.Password}
                   onChange={handleChange}
-                  minLength="8"
+                  minLength="5"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   required
                 />
