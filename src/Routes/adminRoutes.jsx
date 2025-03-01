@@ -19,7 +19,7 @@ import Notification from '../Component/admin/Administrative/Notification.jsx';
 import ExpenseManagement from "../Component/admin/Administrative/ExpenseManagement.jsx"
 import Setting from '../Component/admin/Administrative/Settings';
 import Promote from '../Component/admin/Administrative/Promot.jsx';
-import AdminLogin from '../Component/admin/Administrative/AdminLogin.jsx';
+
 
 export default function AdminRoutes() {
   return (
