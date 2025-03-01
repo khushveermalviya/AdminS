@@ -54,7 +54,7 @@ export default function Complain() {
           ))}
         </div>
       ) : (
-        <p>No complaints found.</p>
+        <p>No complaints fou.</p>
       )}
     </div>
   );
