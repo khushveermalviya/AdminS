@@ -52,7 +52,9 @@ const FacultyNav = ({ isOpen, closeNav, onLogout }) => {
     { icon: <User className="w-5 h-5" />, title: 'Students', path: 'class' },
     { icon: <ClipboardList className="w-5 h-5" />, title: 'Attendance', path: 'attendance' },
     { icon: <Calendar className="w-5 h-5" />, title: 'Timetable', path: 'timetable' },
-    { icon: <FileText className="w-5 h-5" />, title: 'Reports', path: 'reports' },
+    { icon: <User className="w-5 h-5" />, title: 'Result', path: 'Result' },
+    { icon: <FileText className="w-5 h-5" />, title: 'Reports', path: 'reports' }
+
   ];
   
   const handleLogoutClick = () => {
