@@ -9,6 +9,8 @@ import FDashboard from '../Component/admin/Facuity/FDashboard';
 import S1 from '../Component/admin/Students/S1';
 import ClassView from '../Component/admin/Students/Classes';
 import Details from '../Component/admin/Students/Details';
+import Result from '../Component/admin/Facuity/Result';
+
 // ... import other components
 
 export default function AdminRoutes() {
@@ -22,7 +24,9 @@ export default function AdminRoutes() {
         <Route path="Subjects" element={<Subjects />} />
         <Route path="Timetable" element={<Timetable />} />
         <Route path="Attendance" element={<Attendance />} />
+        <Route path="Result" element={<Result />} />
         <Route path="Reports" element={<Reports />} />
+ 
         {/* <Route path="students" element={<Students />} />
     
   
