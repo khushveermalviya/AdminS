@@ -41,11 +41,7 @@ import Fprotect from './Component/admin/Facuity/Fprotect.jsx';
 // Import ErrorBoundary
 
 const router = createHashRouter([
-  // { 
-  //   path: '/',
-  //   element: <Main />, 
 
-  // },
   {
     path: '/',
     element: <LoginLayout />,
