@@ -5,25 +5,25 @@ import toast, { Toaster } from 'react-hot-toast';
 import { Loader2, Eye, EyeOff, User } from 'lucide-react';
 
 const LOGIN_QUERY = gql`
-  query FacultyLogin($Username: String!, $Password: String!) {
-    FacultyLogin(Username: $Username, Password: $Password) {
+  query FacultyLogin($Username: String!, $Password: String!, $OTP: String) {
+    FacultyLogin(Username: $Username, Password: $Password, OTP: $OTP) {
       Username
       tokenss
     }
   }
 `;
 
-export default function Login(Username) {
+export default function Login() {
   const [data, setData] = useState({
     Username: "",
-    Password: ""
+    Password: "",
+    OTP: ""
   });
   const [showPassword, setShowPassword] = useState(false);
   const [login, { data: queryData, loading, error }] = useLazyQuery(LOGIN_QUERY);
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(Username)
     if (queryData?.FacultyLogin) {
       localStorage.setItem('tokenss', queryData.FacultyLogin.tokenss);
       toast.success('Login successful! Redirecting...', {
@@ -66,7 +66,8 @@ export default function Login(Username) {
       await login({
         variables: {
           Username: data.Username,
-          Password: data.Password
+          Password: data.Password,
+          OTP: data.OTP
         }
       });
     } catch (err) {
@@ -134,6 +135,25 @@ export default function Login(Username) {
             >
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
+          </div>
+
+          {/* OTP Field */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              OTP
+            </label>
+            <input
+              type="text"
+              name="OTP"
+              value={data.OTP}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-300 
+                       focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                       dark:bg-gray-800 dark:border-gray-700 dark:text-white
+                       transition-all duration-200"
+              placeholder="Enter your OTP"
+              required
+            />
           </div>
 
           {/* Submit Button */}

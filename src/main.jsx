@@ -34,8 +34,9 @@ import Complaint from './Component/admin/Students/Complaint.jsx';
 import AdminRoutes from "./Routes/adminRoutes.jsx";
 import FacuiltyRoutes from "./Routes/FacuiltyRoutes.jsx" // Corrected import
 import cnt from '../Apolloclient.jsx';
-import AdminLogin from './Component/admin/Administrative/Adminlogin.jsx';
 import Faclogin from './Component/admin/Facuity/Faclogin.jsx';
+import AdminLogin from './Component/admin/Administrative/AdminLogin.jsx';
+import Fprotect from './Component/admin/Facuity/Fprotect.jsx';
 
 // Import ErrorBoundary
 
@@ -59,11 +60,7 @@ const router = createHashRouter([
         path: 'AdministrativeAuth',
         element: <AdminLogin /> // No children here - this is just the login page
       },
-      {
-        path: '/AdministrativeAuth/Administrative/*', // This will match all Administrative routes
-        element: <Protected><AdminRoutes /></Protected>
-      },
-      
+     
       // Faculty login and routes
       {
         path: 'FacilityAuth',
@@ -79,7 +76,7 @@ element: <Protected><AdminRoutes /></Protected>
   },
   {
     path: '/Facility/*', // This will match all Facility routes
-    element: <Protected><FacuiltyRoutes /></Protected>
+    element: <Fprotect><FacuiltyRoutes /></Fprotect>
   },
   {
     path: '/Student',

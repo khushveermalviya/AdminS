@@ -42,7 +42,7 @@ export default function AdminLogin() {
           background: "#f0f9ff",
           color: "#0369a1",
           borderRadius: "10px",
-          border: "1px solid #bae6fd"
+          border: "1px solid #bae6fd" 
         }
       });
       

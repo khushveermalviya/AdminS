@@ -1,6 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { Check, X } from 'lucide-react';
 import { gql, useLazyQuery, useMutation } from '@apollo/client';
+import { data } from 'autoprefixer';
+
+
+
+const GET_STAFF=gql`
+query GetStaffById($Username: String) {
+  GetStaffById(Username: $Username)  {
+    id
+    firstName
+    lastName
+    email
+    phone
+    department
+    role
+    status
+    joiningDate
+    createdAt
+    updatedAt
+    Class
+    Username
+  }
+}
+`
 
 // GraphQL queries and mutations
 const GET_STUDENTS = gql`
@@ -144,8 +167,12 @@ const TodaysAttendanceList = ({ students }) => {
 
 // Main Attendance Component
 const Attendance = () => {
+  const username = localStorage.getItem('username');
   const [selectedClass, setSelectedClass] = useState('');
   const [students, setStudents] = useState([]);
+  const [allocatedClasses, setAllocatedClasses] = useState([]);
+
+
   const [showVerificationPanel, setShowVerificationPanel] = useState(false);
   const [fetchStudents, { loading: fetchLoading, error: fetchError }] = useLazyQuery(GET_STUDENTS, {
     onCompleted: (data) => {
@@ -156,6 +183,32 @@ const Attendance = () => {
       })));
     }
   });
+  const [fetchstaff] = useLazyQuery(GET_STAFF, {
+    variables: { 
+      Username: username // Make sure this is the exact username from localStorage
+    },
+    onCompleted: (data) => {
+      console.log("Full staff data:", data);
+      
+      const classes = data.GetStaffById.Class;
+      const classArray = Array.isArray(classes) 
+        ? classes 
+        : [classes].filter(Boolean);
+      
+      setAllocatedClasses(classArray);
+      
+      if (classArray.length > 0) {
+        setSelectedClass(classArray[0]);
+      }
+    },
+    onError: (error) => {
+      console.error("Error fetching staff:", error);
+    }
+  });
+useEffect(() => {
+  fetchstaff();
+}, [fetchstaff]);
+
 
   const [saveAttendanceMutation, { loading: saveLoading, error: saveError }] = useMutation(SAVE_ATTENDANCE, {
     onCompleted: () => {
@@ -240,20 +293,21 @@ const Attendance = () => {
 
         {/* Class Selection */}
         <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
-          {classes.map(cls => (
-            <button
-              key={cls.id}
-              onClick={() => handleClassSelect(cls.id)}
-              className={`px-4 py-2 rounded-lg transition-colors ${
-                selectedClass === cls.id
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
-            >
-              {cls.name}
-            </button>
-          ))}
-        </div>
+        {allocatedClasses.map(cls => (
+          <button
+            key={cls}
+            onClick={() => handleClassSelect(cls)}
+            className={`px-4 py-2 rounded-lg transition-colors ${
+              selectedClass === cls
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
+          >
+            Class {cls}
+          </button>
+        ))}
+      </div>
+
       </div>
 
       {/* Attendance Table */}

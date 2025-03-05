@@ -123,7 +123,7 @@ const FacultyHeader = ({ searchQuery, setSearchQuery, openNav, onLogout }) => {
   const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
 
   useEffect(() => {
-    const storedUsername = localStorage.getItem('currentUsername');
+    const storedUsername = localStorage.getItem('username');
     if (storedUsername) {
       setUsername(storedUsername);
       

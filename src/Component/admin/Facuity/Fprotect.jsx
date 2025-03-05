@@ -4,7 +4,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import {jwtDecode} from 'jwt-decode';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Protected = ({ children, expectedRole }) => {
+const Fprotect = ({ children, expectedRole }) => {
   const token = localStorage.getItem('tokenss'); // Check if token exists
   const location = useLocation();
   const [isValid, setIsValid] = useState(null); // State to track token validity
@@ -26,7 +26,7 @@ const Protected = ({ children, expectedRole }) => {
         // console.log('Decoded token:', decodedToken);
 
         if (decodedToken.role !== "faculty") {
-          // console.log('Role does not match expected role');
+        //   console.log('Role does not match expected role');
           localStorage.removeItem('tokenss');
           toast.error('You do not have access to this page. You will be redirected to the login page.', {
             autoClose: 5000,
@@ -48,10 +48,10 @@ const Protected = ({ children, expectedRole }) => {
         // console.log('Server response:', data);
 
         if (response.ok && data.valid) {
-          // console.log('Token is valid and role matches');
+        //   console.log('Token is valid and role matches');
           setIsValid(true); // Token is valid and role matches
         } else {
-          // console.log('Token is invalid, expired, or role does not match');
+        //   console.log('Token is invalid, expired, or role does not match');
           // Clear the invalid token
           localStorage.removeItem('tokenss');
           toast.error('Your session has expired or you do not have access. You will be redirected to the login page.', {
@@ -91,12 +91,12 @@ const Protected = ({ children, expectedRole }) => {
   }
 
   // If we're on the root path and have a valid token, redirect to admin portal
-  if (location.pathname === '/AdministrativeAuth' && isValid) {
-    return <Navigate to="/Administrative" replace state={{ from }} />;
+  if (location.pathname === '/FacilityAuth' && isValid) {
+    return <Navigate to="/Facility" replace state={{ from }} />;
   }
 
   // If we have a valid token and trying to access protected routes, allow access
-  if (isValid && location.pathname.startsWith('/Administrative')) {
+  if (isValid && location.pathname.startsWith('/Facility')) {
     return (
       <>
         {children}
@@ -118,10 +118,10 @@ const Protected = ({ children, expectedRole }) => {
   // Default fallback - redirect to root
   return (
     <>
-      <Navigate to="/AdministrativeAuth" replace state={{ from }} />
+      <Navigate to="/FacilityAuth" replace state={{ from }} />
       <ToastContainer />
     </>
   );
 };
 
-export default Protected;
+export default Fprotect;

@@ -14,7 +14,7 @@ const LOGIN_QUERY = gql`
   }
 `;
 
-export default function FacLogin() {
+export default function Faclogin({ setUsername }) {
   // State management
   const [credentials, setCredentials] = useState({
     Username: "",
@@ -40,6 +40,10 @@ export default function FacLogin() {
         localStorage.removeItem('facultyUsername');
       }
       
+      // Set the username in the parent component
+
+      localStorage.setItem('username', queryData.FacultyLogin.Username);
+
       // Show success notification
       toast.success('Login successful! Welcome to Faculty Portal', {
         icon: <CheckCircle className="text-green-500" />,
@@ -57,7 +61,7 @@ export default function FacLogin() {
         state: { Username: queryData.FacultyLogin.Username } 
       }), 2000);
     }
-  }, [queryData, navigate, rememberMe, credentials.Username]);
+  }, [queryData, navigate, rememberMe, credentials.Username, setUsername]);
 
   // Handle login errors
   useEffect(() => {

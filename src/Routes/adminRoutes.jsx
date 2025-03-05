@@ -28,7 +28,7 @@ export default function AdminRoutes() {
         <Route index element={<Dashboard />} />
         <Route path="staff" element={<StaffManagement />} />
         <Route path="staff/addstaff" element={<Addstaff />} />
-        <Route path="staff/:id" element={<StaffDetails />} /> {/* Add route for StaffDetails */}
+        <Route path="staff/:username" element={<StaffDetails />} /> {/* Add route for StaffDetails */}
         <Route path="academics" element={<Academics />} />
         <Route path="Promote" element={<Promote />} />
         <Route path="finance" element={<Finance />} />

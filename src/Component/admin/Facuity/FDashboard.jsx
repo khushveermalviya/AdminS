@@ -6,9 +6,11 @@ import {
   BarChart2,
   Award,
 } from "lucide-react";
+import useUserStore from "../../../app/useUserStore";
 
 export default function FDashboard() {
   // Mock data for charts
+  const dashh = useUserStore((state) => state.Dash);
   const groupPerformanceData = {
     labels: ["Group A", "Group B", "Group C", "Group D"],
     datasets: [
