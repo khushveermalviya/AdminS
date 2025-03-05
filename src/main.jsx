@@ -36,7 +36,7 @@ import FacuiltyRoutes from "./Routes/FacuiltyRoutes.jsx" // Corrected import
 import cnt from '../Apolloclient.jsx';
 import Faclogin from './Component/admin/Facuity/Faclogin.jsx';
 import Fprotect from './Component/admin/Facuity/Fprotect.jsx';
-import AdminLogin from './Component/admin/Administrative/AdminLogin.jsx';
+import AdminLogin from './AdminLogin.jsx';
 
 // Import ErrorBoundary
 
